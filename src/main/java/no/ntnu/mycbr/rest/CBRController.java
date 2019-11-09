@@ -22,7 +22,7 @@ public class CBRController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")
     })
-    public Case getCase(@RequestParam(value="caseID", defaultValue="144_vw") String caseID) {
+    public Case getCase(@RequestParam(value="caseID", defaultValue="Book1") String caseID) {
         return new Case(caseID);
     }
 
@@ -36,9 +36,9 @@ public class CBRController {
             @ApiResponse(code = 500, message = "Failure")
     })
     public Query getSimilarCases(
-            @RequestParam(value="casebase", defaultValue="CaseBase0") String casebase,
-            @RequestParam(value="concept name", defaultValue="Car") String concept,
-            @RequestParam(value="amalgamation function", defaultValue="CarFunc") String amalFunc,
+            @RequestParam(value="casebase", defaultValue="CB_csvImport") String casebase,
+            @RequestParam(value="concept name", defaultValue="Book") String concept,
+            @RequestParam(value="amalgamation function", defaultValue="CustomFunc") String amalFunc,
             @RequestParam(required = false, value="no of returned cases",defaultValue = "-1") int k,
             @RequestBody(required = true)  HashMap<String, Object> queryContent) {
         return new Query(casebase, concept, amalFunc, queryContent, k);
@@ -54,10 +54,10 @@ public class CBRController {
             @ApiResponse(code = 500, message = "Failure")
     })
     public Query getSimilarCasesByID(
-            @RequestParam(value="casebase", defaultValue="CaseBase0") String casebase,
-            @RequestParam(value="concept", defaultValue="Car") String concept,
-            @RequestParam(value="amalgamation function", defaultValue="CarFunc") String amalFunc,
-            @RequestParam(value="caseID", defaultValue="144_vw") String caseID,
+            @RequestParam(value="casebase", defaultValue="CB_csvImport") String casebase,
+            @RequestParam(value="concept name", defaultValue="Book") String concept,
+            @RequestParam(value="amalgamation function", defaultValue="CustomFunc") String amalFunc,
+            @RequestParam(value="caseID", defaultValue="Book1") String caseID,
             @RequestParam(required = false, value="no of returned cases",defaultValue = "-1") int k) {
         return new Query(casebase, concept, amalFunc, caseID, k);
     }
@@ -72,11 +72,11 @@ public class CBRController {
             @ApiResponse(code = 500, message = "Failure")
     })
     public Query getSimilarCasesByAttribute(
-            @RequestParam(value="casebase", defaultValue="CaseBase0") String casebase,
-            @RequestParam(value="concept name", defaultValue="Car") String concept,
-            @RequestParam(value="amalgamation function", defaultValue="CarFunc") String amalFunc,
-            @RequestParam(value="Symbol attribute name", defaultValue="Manufacturer") String attribute,
-            @RequestParam(value="value", defaultValue="vw") String value,
+            @RequestParam(value="casebase", defaultValue="CB_csvImport") String casebase,
+            @RequestParam(value="concept name", defaultValue="Book") String concept,
+            @RequestParam(value="amalgamation function", defaultValue="CustomFunc") String amalFunc,
+            @RequestParam(value="Symbol attribute name", defaultValue="PENERBIT") String attribute,
+            @RequestParam(value="value", defaultValue="GAGASMEDIA") String value,
             @RequestParam(required = false, value="no of returned cases",defaultValue = "-1") int k) {
         return new Query(casebase, concept, amalFunc, attribute, value, k);
     }
@@ -91,9 +91,9 @@ public class CBRController {
             @ApiResponse(code = 500, message = "Failure")
     })
     public @ResponseBody List<LinkedHashMap<String, String>> getSimilarCasesWithContent(
-            @RequestParam(value="casebase", defaultValue="CaseBase0") String casebase,
-            @RequestParam(value="concept name", defaultValue="Car") String concept,
-            @RequestParam(value="amalgamation function", defaultValue="CarFunc") String amalFunc,
+            @RequestParam(value="casebase", defaultValue="CB_csvImport") String casebase,
+            @RequestParam(value="concept name", defaultValue="Book") String concept,
+            @RequestParam(value="amalgamation function", defaultValue="CustomFunc") String amalFunc,
             @RequestParam(required = false, value="no of returned cases",defaultValue = "-1") int k,
             @RequestBody(required = true)  HashMap<String, Object> queryContent) {
 
@@ -112,10 +112,10 @@ public class CBRController {
             @ApiResponse(code = 500, message = "Failure")
     })
     public @ResponseBody List<LinkedHashMap<String, String>> getSimilarCasesByIDWithContent(
-            @RequestParam(value="casebase", defaultValue="CaseBase0") String casebase,
-            @RequestParam(value="concept", defaultValue="Car") String concept,
-            @RequestParam(value="amalgamation function", defaultValue="CarFunc") String amalFunc,
-            @RequestParam(value="caseID", defaultValue="144_vw") String caseID,
+            @RequestParam(value="casebase", defaultValue="CB_csvImport") String casebase,
+            @RequestParam(value="concept", defaultValue="Book") String concept,
+            @RequestParam(value="amalgamation function", defaultValue="CustomFunc") String amalFunc,
+            @RequestParam(value="caseID", defaultValue="Book1") String caseID,
             @RequestParam(required = false, value="no of returned cases",defaultValue = "-1") int k) {
 
         Query query = new Query(casebase, concept, amalFunc, caseID, k);
@@ -133,11 +133,11 @@ public class CBRController {
             @ApiResponse(code = 500, message = "Failure")
     })
     public @ResponseBody List<LinkedHashMap<String, String>> getSimilarCasesByAttributeWithContent(
-            @RequestParam(value="casebase", defaultValue="CaseBase0") String casebase,
-            @RequestParam(value="concept name", defaultValue="Car") String concept,
-            @RequestParam(value="amalgamation function", defaultValue="CarFunc") String amalFunc,
-            @RequestParam(value="Symbol attribute name", defaultValue="Manufacturer") String attribute,
-            @RequestParam(value="value", defaultValue="vw") String value,
+            @RequestParam(value="casebase", defaultValue="CB_csvImport") String casebase,
+            @RequestParam(value="concept name", defaultValue="Book") String concept,
+            @RequestParam(value="amalgamation function", defaultValue="CustomFunc") String amalFunc,
+            @RequestParam(value="Symbol attribute name", defaultValue="PENERBIT") String attribute,
+            @RequestParam(value="value", defaultValue="GAGASMEDIA") String value,
             @RequestParam(required = false, value="no of returned cases",defaultValue = "-1") int k) {
 
         Query query = new Query(casebase, concept, amalFunc, attribute, value, k);
@@ -155,9 +155,9 @@ public class CBRController {
             @ApiResponse(code = 500, message = "Failure")
     })
     public @ResponseBody String getSimilarCasesWithContent(
-            @RequestParam(value="casebase", defaultValue="CaseBase0") String casebase,
-            @RequestParam(value="concept name", defaultValue="Car") String concept,
-            @RequestParam(value="amalgamation function", defaultValue="CarFunc") String amalFunc,
+            @RequestParam(value="casebase", defaultValue="CB_csvImport") String casebase,
+            @RequestParam(value="concept name", defaultValue="Book") String concept,
+            @RequestParam(value="amalgamation function", defaultValue="CustomFunc") String amalFunc,
             @RequestParam(value="delimiter", defaultValue=";") String delimiter,
             @RequestParam(required = false, value="no of returned cases",defaultValue = "-1") int k,
             @RequestBody(required = true)  HashMap<String, Object> queryContent) {
@@ -180,10 +180,10 @@ public class CBRController {
             @ApiResponse(code = 500, message = "Failure")
     })
     public String getSimilarCasesByIDWithContentAsCSV(
-            @RequestParam(value="casebase", defaultValue="CaseBase0") String casebase,
-            @RequestParam(value="concept", defaultValue="Car") String concept,
-            @RequestParam(value="amalgamation function", defaultValue="CarFunc") String amalFunc,
-            @RequestParam(value="caseID", defaultValue="144_vw") String caseID,
+            @RequestParam(value="casebase", defaultValue="CB_csvImport") String casebase,
+            @RequestParam(value="concept", defaultValue="Book") String concept,
+            @RequestParam(value="amalgamation function", defaultValue="CustomFunc") String amalFunc,
+            @RequestParam(value="caseID", defaultValue="Book1") String caseID,
             @RequestParam(value="delimiter", defaultValue=";") String delimiter,
             @RequestParam(required = false, value="no of returned cases",defaultValue = "-1") int k) {
 
@@ -204,11 +204,11 @@ public class CBRController {
             @ApiResponse(code = 500, message = "Failure")
     })
     public @ResponseBody String getSimilarCasesByAttributeWithContent(
-            @RequestParam(value="casebase", defaultValue="CaseBase0") String casebase,
-            @RequestParam(value="concept name", defaultValue="Car") String concept,
-            @RequestParam(value="amalgamation function", defaultValue="CarFunc") String amalFunc,
-            @RequestParam(value="Symbol attribute name", defaultValue="Manufacturer") String attribute,
-            @RequestParam(value="value", defaultValue="vw") String value,
+            @RequestParam(value="casebase", defaultValue="CB_csvImport") String casebase,
+            @RequestParam(value="concept name", defaultValue="Book") String concept,
+            @RequestParam(value="amalgamation function", defaultValue="CustomFunc") String amalFunc,
+            @RequestParam(value="Symbol attribute name", defaultValue="PENERBIT") String attribute,
+            @RequestParam(value="value", defaultValue="Book1") String value,
             @RequestParam(value="delimiter", defaultValue=";") String delimiter,
             @RequestParam(required = false, value="no of returned cases",defaultValue = "-1") int k) {
 
@@ -280,8 +280,8 @@ public class CBRController {
             @ApiResponse(code = 500, message = "Failure")
     })
     public ValueRange getValueRange(
-            @RequestParam(value="concept name", defaultValue="Car") String concept,
-            @RequestParam(value="attribute name", defaultValue="Color") String attributeName) {
+            @RequestParam(value="concept name", defaultValue="Book") String concept,
+            @RequestParam(value="attribute name", defaultValue="PENERBIT") String attributeName) {
 
         return new ValueRange(concept, attributeName);
     }

@@ -1,9 +1,19 @@
 # Introduction
 
-This project puts myCBR into Spring.io and provides the created REST calls through a Swagger API
+Forked version of kerstinbach/mycbr-rest-example, slightly modified to work with a different project
 
-# How to
+# Installing myCBR workbench 
+* Install myCBR workbench from http://mycbr-project.org/download.html
+* From the workbench, generate a new project case to be used as the mycbr-rest's base
 
+# Installing mycbr SDK
+* Clone the project from https://github.com/kerstinbach/mycbr-sdk
+* In the root folder, run:
+```
+mvn clean install
+```
+
+# Installing the mycbr-rest
 * First clone the project 
 * To build it go into its root folder and run: 
 ```
@@ -14,8 +24,7 @@ mvn clean install
 java -jar ./target/mycbr-rest-example-1.0-SNAPSHOT.jar 
 ```
 * After Spring has started, you can find the API documentation here: http://localhost:8080/swagger-ui.html#!/
- * Greeting controller is the sample I used to build the app
- * CBR Controller contains the myCBR bits
+ * CBR Controller contains the myCBR functionalities
 * ctrl + C shuts down the server
 
 # Functionalities
@@ -34,9 +43,29 @@ java -jar ./target/mycbr-rest-example-1.0-SNAPSHOT.jar
  * Currently only Multiple Symbol attributes are supported
  * the number of returned cases can be set, use -1 for returning all
  
- 
-# Customization to other myCBR projects
+# How to customize the rest
 * The app requires a myCBR project, which should be put into mycbr-rest-example/src/main/resources
-* In order to detect the project file, CBREngine.java has to be adapted:
-* private static String projectName = "used_cars_flat.prj" should be changed to the project file's name
-* The rest of the API is independent from the project, hence only the parameters such as case base and comcept names have to be adapted to the new project
+* Edit the CBREngine.java file in mycbr-rest-example\src\main\java\no\ntnu\mycbr:
+```
+  .
+  .
+  .
+    // modify this if necessary, pointing to point to mycbr-rest-example\src\main\resources
+	private static String data_path = System.getProperty("user.dir") + "/src/main/resources/"
+	// name of the project file in the resources directory
+	private static String projectName = "book_similarity.prj"; 
+	// name of the concept to be used 
+	private static String conceptName = "Book";
+	// name of the csv containing the instances, located in the resources directory
+	private static String csv = "Sample_Data.csv";
+	// set the separators that are used in the csv file
+	private static String columnseparator = ";";
+	private static String multiplevalueseparator = ",";
+	// name of the case base that should be used; the default name in myCBR is CB_csvImport
+	private static String casebase = "CB_csvImport";
+  .
+  .
+  .
+	
+```
+* The docs in http://localhost:8080/swagger-ui.html#!/ will not reflect the change in project, however the API will work dynamically according to the project that is used as the base
